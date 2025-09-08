@@ -14,5 +14,35 @@ function tresEnRaya(tablero){
     }
 
     for (const combinacion of combinacionesGanadoras) {
-    } 
-}  
+        for (const jugador of ["X", "O"]) {
+            if (combinacion.every(index => tabla[index] === jugador)) {
+                ganador = jugador;
+                break;
+            }
+        }
+        
+    }
+
+    if (ganador) {
+        return `El ganador es: ${ganador} ` ;
+
+    } else if (tabla.every(celda => celda !== "")) {
+        return "Empate";
+    } else {
+        return "El juego continúa";
+    }    
+
+
+}
+console.log(tresEnRaya(["X", "O", "X",
+                        "O", "X", "O",
+                         "O", "X", "X"])); // Empate
+console.log(tresEnRaya(["X", "O", "X",
+                        "O", "X", "", 
+                        "O", "O", "O"]));
+console.log(tresEnRaya(["X", "O", "X", 
+                        "O", "", "",
+                        "O", "", "X"]));
+console.log(tresEnRaya(["X", "O", "O",
+                        "O", "X", "X",
+                        "X", "O", "O"]));
