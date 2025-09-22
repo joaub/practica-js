@@ -7,7 +7,7 @@ const diasEntreFechas = ((fecha1, fecha2) => {
     }
 
     function validarFecha(fechaStr) {
-        const [dia, mes, año] = fechaStr.match(regex);
+        const [, dia, mes, año] = fechaStr.match(regex);
         const fecha = new Date(año, mes - 1, dia);
         if (fecha.getDate() != dia || fecha.getMonth() != mes - 1 || fecha.getFullYear() != año) {
             throw new Error(`Fecha inválida: ${fechaStr}`);
@@ -27,10 +27,13 @@ const diasEntreFechas = ((fecha1, fecha2) => {
         segundos: 1000
     };
     const resultado = {};
-
-    return;
+    for (const key in factores) {
+        resultado[key] = Math.floor(diferenciaMs / factores[key]);
+    }
+    return resultado;
 });
 
-console.log(diasEntreFechas("01/01/2024", "05/01/2025", "dias"));
-console.log(diasEntreFechas("06/02/2022", "01/03/2026", "años"));
-console.log(diasEntreFechas("06/02/2001", "21/09/2025", "horas"));
+
+console.log(diasEntreFechas("31/12/2022", "22/09/2025"));
+console.log(diasEntreFechas("06/02/2001", "21/01/2025"));
+console.log(diasEntreFechas("14/01/1992", "06/02/2025"));
